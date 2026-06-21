@@ -1,0 +1,461 @@
+/* ===========================================================
+   DAILY LIST — styles
+   Design: warm paper background, ink-blue accent, serif display
+   headings paired with a clean sans body face. The signature
+   element is the hand-stamped checkmark badge in the header.
+   =========================================================== */
+
+/* ---------- Design tokens ---------- */
+:root {
+  /* Color palette */
+  --paper: #faf6ef;
+  --paper-raised: #ffffff;
+  --ink: #2b2620;
+  --ink-soft: #6f675c;
+  --line: #e6ddcc;
+  --accent: #2f4858;        /* deep ink-blue */
+  --accent-soft: #cddae0;
+  --stamp: #c2542f;         /* terracotta stamp accent */
+  --done: #8a9a8b;          /* muted sage for completed text */
+  --danger: #b6432f;
+
+  /* Type */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* Layout */
+  --radius: 10px;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.08);
+}
+
+/* ---------- Reset ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(43, 38, 32, 0.05) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 48px 20px 64px;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+input:focus,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ---------- Page shell ---------- */
+.page {
+  width: 100%;
+  max-width: 560px;
+}
+
+/* ---------- Header ---------- */
+.header {
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.header__eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--stamp);
+  margin-bottom: 8px;
+}
+
+.header__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(32px, 6vw, 44px);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+/* ---------- Card ---------- */
+.card {
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 18px;
+  }
+}
+
+/* ---------- Add form ---------- */
+.add-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.add-form__input {
+  flex: 1;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  padding: 13px 16px;
+  font-size: 15px;
+  background: var(--paper);
+  transition: border-color 0.15s ease;
+}
+
+.add-form__input::placeholder {
+  color: var(--ink-soft);
+}
+
+.add-form__input:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.add-form__btn {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--paper-raised);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.12s ease, background 0.15s ease;
+}
+
+.add-form__btn:hover {
+  background: #243a47;
+}
+
+.add-form__btn:active {
+  transform: scale(0.94);
+}
+
+.add-form__btn-plus {
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 500;
+  margin-top: -2px;
+}
+
+/* ---------- Toolbar: filters + counter ---------- */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 4px;
+}
+
+.filters {
+  display: flex;
+  gap: 4px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 3px;
+}
+
+.filter-btn {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 5px;
+  color: var(--ink-soft);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.filter-btn:hover {
+  color: var(--ink);
+}
+
+.filter-btn.is-active {
+  background: var(--accent);
+  color: var(--paper-raised);
+}
+
+.counter {
+  font-size: 13px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+/* ---------- Task list ---------- */
+.task-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--line);
+  animation: slide-in 0.18s ease;
+}
+
+.task-item:last-child {
+  border-bottom: none;
+}
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom checkbox styled as a small stamped square */
+.task-item__check {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 1.5px solid var(--line);
+  background: var(--paper-raised);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.task-item__check:hover {
+  border-color: var(--accent);
+}
+
+.task-item.is-completed .task-item__check {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.task-item__check-icon {
+  width: 12px;
+  height: 12px;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+
+.task-item.is-completed .task-item__check-icon {
+  opacity: 1;
+}
+
+.task-item__text {
+  flex: 1;
+  font-size: 15px;
+  line-height: 1.4;
+  word-break: break-word;
+  color: var(--ink);
+  cursor: text;
+}
+
+.task-item.is-completed .task-item__text {
+  color: var(--done);
+  text-decoration: line-through;
+  text-decoration-color: var(--done);
+}
+
+.task-item__edit-input {
+  flex: 1;
+  font-size: 15px;
+  padding: 6px 8px;
+  border: 1.5px solid var(--accent);
+  border-radius: 6px;
+  background: var(--paper);
+}
+
+.task-item__actions {
+  display: flex;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  flex-shrink: 0;
+}
+
+.task-item:hover .task-item__actions,
+.task-item:focus-within .task-item__actions {
+  opacity: 1;
+}
+
+.task-item__action-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-soft);
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.task-item__action-btn:hover {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.task-item__action-btn.is-delete:hover {
+  background: #f6e4de;
+  color: var(--danger);
+}
+
+.task-item__action-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ---------- Empty state ---------- */
+.empty-state {
+  display: none; /* toggled to flex by JS when there are no tasks to show */
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 40px 12px 28px;
+}
+
+.empty-state.is-visible {
+  display: flex;
+}
+
+.empty-state__mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px dashed var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--ink-soft);
+}
+
+.empty-state__text {
+  font-size: 14px;
+  color: var(--ink-soft);
+  max-width: 280px;
+}
+
+/* ---------- List footer ---------- */
+.list-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.list-footer__hint {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.clear-btn {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--danger);
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background 0.12s ease;
+}
+
+.clear-btn:hover {
+  background: #f6e4de;
+}
+
+.clear-btn:disabled {
+  color: var(--ink-soft);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.clear-btn:disabled:hover {
+  background: none;
+}
+
+/* ---------- Page footer ---------- */
+.page-footer {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.page-footer p {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 480px) {
+  body {
+    padding: 32px 14px 48px;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .list-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .task-item__actions {
+    opacity: 1; /* always show on touch devices, no hover available */
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .task-item {
+    animation: none;
+  }
+  .add-form__btn,
+  .filter-btn,
+  .task-item__check,
+  .task-item__check-icon,
+  .task-item__actions {
+    transition: none;
+  }
+}

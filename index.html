@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily List — To-Do App</title>
+
+  <!-- Google Fonts: a sturdy serif for headings, a clean sans for everything else -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- ===== Header ===== -->
+    <header class="header">
+      <p class="header__eyebrow">Today's List</p>
+      <h1 class="header__title">Get it down,<br>then get it done.</h1>
+    </header>
+
+    <!-- ===== Main card ===== -->
+    <main class="card">
+
+      <!-- Add task form -->
+      <form id="task-form" class="add-form" autocomplete="off">
+        <input
+          type="text"
+          id="task-input"
+          class="add-form__input"
+          placeholder="Add a task… e.g. Reply to client email"
+          maxlength="120"
+          aria-label="New task"
+        />
+        <button type="submit" class="add-form__btn" aria-label="Add task">
+          <span class="add-form__btn-plus">+</span>
+        </button>
+      </form>
+
+      <!-- Filters + counter -->
+      <div class="toolbar">
+        <div class="filters" id="filters" role="tablist" aria-label="Filter tasks">
+          <button class="filter-btn is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button class="filter-btn" data-filter="active" role="tab" aria-selected="false">Active</button>
+          <button class="filter-btn" data-filter="completed" role="tab" aria-selected="false">Completed</button>
+        </div>
+        <p class="counter" id="task-counter">0 tasks left</p>
+      </div>
+
+      <!-- Task list -->
+      <ul class="task-list" id="task-list">
+        <!-- Tasks are rendered here dynamically by script.js -->
+      </ul>
+
+      <!-- Empty state, shown/hidden via JS -->
+      <div class="empty-state" id="empty-state">
+        <span class="empty-state__mark">✓</span>
+        <p class="empty-state__text" id="empty-state-text">Nothing on the list yet. Add your first task above.</p>
+      </div>
+
+      <!-- Footer bar: clear completed -->
+      <div class="list-footer">
+        <span class="list-footer__hint">Double-click a task to edit it</span>
+        <button id="clear-completed" class="clear-btn">Clear completed</button>
+      </div>
+
+    </main>
+
+    <footer class="page-footer">
+      <p>Saved automatically in this browser.</p>
+    </footer>
+
+  </div>
+
+  <!-- Reusable edit row template, cloned by JS when editing a task -->
+  <template id="edit-template">
+    <input type="text" class="task-item__edit-input" maxlength="120" />
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
